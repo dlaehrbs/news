@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/styles/full_news.css">
+    <title><%- news.title %></title>
+</head>
+<body>
+    <%- include('header.ejs') %>
+
+    <% if (loggedin) { %>
+        <div class="news_up_de">
+            <div class="update">
+                <a href="/news_update/<%= news.id %>">글 수정하기</a>
+            </div>
+            <div class="del">
+                <a href="/news_delete/<%= news.id %>">글 삭제하기</a>
+            </div>
+        </div>
+    <% } %>
+
+    <div class="container">
+        <div class="title">
+            <h1><%- news.title %></h1>
+        </div>
+        <div class="infor">
+            <p><%- news.author %></p>
+            <p><%- createdAt %></p>
+        </div>
+        <div class="content">
+            <%- news.content.replace(/\n/g, '<br>') %>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

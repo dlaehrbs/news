@@ -1,0 +1,33 @@
+<% if (loggedin) { %>
+    <div class="name">
+        <h1>안녕하세요 <%- username %>님</h1>
+    </div>
+
+    <style>
+        .name {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, #333399, #ff00cc);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            -webkit-background-clip: text;
+            /* 텍스트에만 그라데이션 적용 */
+            -webkit-text-fill-color: transparent;
+            /* 텍스트 색상 투명하게 설정 */
+        }
+
+        .name h1 {
+            font-size: 6rem;
+            font-weight: 900;
+        }
+
+        @media screen and (max-width: 768px) {
+            .name h1 {
+                font-size: 2rem;
+            }
+        }
+
+    </style>
+    <% } %>

@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'SF Pro Display', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+li {
+    list-style: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 180px 0;
+    width: 100vw;
+}
+
+.main_news {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 80vw;
+}
+
+.news_card {
+    width: 350px;
+    height: 450px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 15px;
+    transition: all 0.5s ease-in-out;
+    flex-grow: 1;
+}
+
+.news_card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    transform: scale(1.01);
+    cursor: pointer;
+}
+
+.news_img {
+    width: 100%;
+    height: 70%;
+    border-radius: 15px;
+    box-shadow: 0 0 5px rgb(0, 0, 0, 0.4);
+}
+
+.news_img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.news_card_infor {
+    margin: 20px 0 0 0;
+    height: 30%;
+}
+
+.news_title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    font-size: 0.8rem;
+    height: 20%;
+}
+
+.news_description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    max-height: 25%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    margin: 10px 0 0 1px;
+    opacity: 0.5;
+    font-size: 0.9rem;
+}
+
+.news_infor {
+    display: flex;
+    width: 100%;
+    top: 20%;
+    left: 2px;
+    position: relative;
+}
+
+.news_infor p {
+    font-size: 0.7rem;
+    opacity: 0.5;
+    margin: 0 10px 0 0;
+}
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100vw;
+        height: 50px;
+        position: fixed;
+        top: 0;
+        backdrop-filter: blur(10px);
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+    }
+
+    .header h1 {
+        font-size: 1rem;
+        font-weight: 500;
+        margin: 0 0 0 50px;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .header_link {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: 0 20px 0 0;
+        width: 120px;
+        font-size: 0.7rem;
+        font-weight: 400;
+    }
+
+    .news_card {
+        width: 300px;
+        height: 450px;
+    }
+}

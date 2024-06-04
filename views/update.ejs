@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 수정</title>
+    <link rel="stylesheet" href="/styles/update.css">
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
+</head>
+<body>
+    <div class="update">
+        <h1>게시글 수정</h1>
+        <form action="/news_update/process/<%= news.id %>" method="post" enctype="multipart/form-data">
+            <input type="text" id="title" name="title" value="<%= news.title %>" required>
+            <div id="editor-container"></div>
+            <textarea id="content" name="content" style="display:none;"></textarea>
+            
+            <div class="img">썸네일 업로드</div>
+            <input type="file" id="image" name="image" accept="image/*">
+            
+            <% if (news.image_url) { %>
+                <div>
+                    <img src="<%= news.image_url %>" alt="게시글 이미지" style="max-width: 300px;">
+                </div>
+            <% } %>
+            
+            <button type="submit">작성하기</button>
+        </form>
+    </div>
+
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <script>
+        // TOAST UI Editor 초기화
+        const editor = new toastui.Editor({
+            el: document.querySelector('#editor-container'),
+            initialEditType: 'wysiwyg', // 초기 편집 유형을 wysiwyg로 설정
+            previewStyle: 'vertical', // 미리보기 스타일 설정
+            height: '500px',
+            initialValue: `<%- news.content.replace(/\n/g, '<br>') %>`, // 기존 콘텐츠를 초기값으로 설정
+        });
+
+        // 폼 제출 시 에디터의 내용을 hidden textarea에 설정
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault(); // 기본 폼 제출 동작을 막음
+            document.querySelector('#content').value = editor.getHTML(); // HTML 내용으로 변경
+            this.submit(); // 폼 제출
+        });
+    </script>
+</body>
+</html>

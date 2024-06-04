@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/search_results.css">
+    <title>검색 결과</title>
+</head>
+<body>
+    <%- include('header.ejs') %>
+
+
+    <div class="search_title">
+        <h1>"<%= query %>"에 관한 검색 결과</h1>
+    </div>
+    <div id="searchResultsContainer">
+        <% if (news.length === 0) { %>
+            <div class="no_search">
+                <p>검색 결과가 없습니다.</p>
+            </div>
+        <% } else { %>
+            <div class="main_news">
+                <% news.forEach(news => { %>
+                    <div class="news_card" id="<%= news.id %>" onclick="goToNews('<%- news.id %>')">
+                        <div class="news_img">
+                        <% if (news.image_url) { %>
+                                <img src="<%= news.image_url %>" alt="News Image">
+                        <% } %>
+                        </div>
+                        <div class="news_card_infor">
+                            <div class="news_title">
+                                <h1><%= news.title %></h1>
+                            </div>
+            
+                            <div class="news_description">
+                                <p>
+                                    <% if (news.content) { %>
+                                        <% 
+
+                                            const contentWithoutTagsAndNewlines = news.decodedContent.replace(/<[^>]+>/g, '').replace(/\n/g, ' ');
+                                        %>
+                                        <div>
+                                            <%= contentWithoutTagsAndNewlines %>
+                                        </div>
+                                    <% } %>
+                                </p>
+                            </div>
+            
+                            <div class="news_infor">
+                                <p><%= news.author %></p>
+                                <%
+                                const createdAt = new Date(news.created_at).toLocaleString('ko-KR', {
+                                    year: 'numeric',
+                                    month: '2-digit',
+                                    day: '2-digit',
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    timeZone: 'Asia/Seoul'
+                                })
+                                %>
+                                <p><%= createdAt %></p>
+                                <% if (loggedin) { %>
+                                    <p><a href="/news_update/<%= news.id %>">수정</a> | <a href="/news_delete/<%= news.id %>">삭제</a></p>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+    </div>
+
+    <script>
+        function goToNews(id) {
+            window.location.href = '/full_news/' + id;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>글 작성하기</title>
+    <link rel="stylesheet" href="/styles/create.css">
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
+</head>
+<body>
+    <div class="create">
+        <h1>글 작성하기</h1>
+        <form action="/news_create/process" method="post" enctype="multipart/form-data">
+            <input type="text" id="title" name="title" placeholder="제목" required>
+            <div id="editor-container"></div>
+            <textarea id="content" name="content" style="display:none;"></textarea>
+            <div class="img">
+                <div>뉴스 썸네일 올리기</div>
+                <input type="file" id="image" name="image">
+            </div>
+            <button type="submit">작성하기</button>
+        </form>
+    </div>
+
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <script>
+        // TOAST UI Editor 초기화
+        const editor = new toastui.Editor({
+            el: document.querySelector('#editor-container'),
+            initialEditType: 'wysiwyg', // 초기 편집 유형 설정
+            previewStyle: 'vertical', // 미리보기 스타일 설정
+            height: '500px',
+        });
+
+        // 폼 제출 시 에디터의 내용을 hidden textarea에 설정
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault(); // 기본 폼 제출 동작을 막음
+            document.querySelector('#content').value = editor.getMarkdown();
+            this.submit(); // 폼 제출
+        });
+    </script>
+</body>
+</html>

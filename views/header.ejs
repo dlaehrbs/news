@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/header.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1><a href="/">여기바바</a></h1>
+        <div class="header_link">
+            <form id="searchForm" class="searchForm" action="/search" method="get">
+                <input type="text" name="q" placeholder="검색어 입력" onkeydown="enterkeySearch(event)">
+            </form>
+            <li><a href="/">홈</a></li>
+            <% if (loggedin) { %>
+                <li><a href="/news_create">블로그 작성</a></li>
+                <li><a href="/logout">로그아웃</a></li>
+            <% } else { %>
+                <li><a href="/login">로그인</a></li>
+            <% } %>
+        </div>
+    </div>
+    
+    
+    
+    <script>
+        function enterkeySearch(event) {
+            if (event.keyCode == 13) {
+                document.getElementById('searchForm').submit();
+            }
+        }
+    </script>
+</body>
+</html>

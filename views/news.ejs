@@ -1,0 +1,46 @@
+<div class="main_news">
+    <% news.forEach(news => { %>
+        <div class="news_card" id="<%= news.id %>" onclick="goToNews('<%- news.id %>')">
+            <div class="news_img">
+            <% if (news.image_url) { %>
+                    <img src="<%= news.image_url %>" alt="News Image">
+            <% } %>
+            </div>
+            <div class="news_card_infor">
+                <div class="news_title">
+                    <h1><%= news.title %></h1>
+                </div>
+
+                <div class="news_description">
+                    <p>
+                        <% if (news.content) { %>
+                            <% 
+                                const contentWithoutTagsAndNewlines = news.decodedContent.replace(/<[^>]+>/g, '').replace(/\n/g, ' '); // 태그 제거 및 줄바꿈 공백으로 대체
+                            %>
+                            <div>
+                                <%= contentWithoutTagsAndNewlines %>
+                            </div>
+                        <% } %>
+                        
+                    </p>
+                </div>
+
+                <div class="news_infor">
+                    <p><%= news.author %></p>
+                    <p><%= news.createdAt %></p>
+                    <% if (loggedin) { %>
+                        <p><a href="/news_update/<%= news.id %>">수정</a> | <a href="/news_delete/<%= news.id %>">삭제</a></p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    <% }); %>
+</div>
+
+<script>
+    function goToNews(id) {
+        window.location.href = '/full_news/' + id;
+    }
+</script>
+
+
